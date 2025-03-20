@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        (function() 
+        {
+            // Define repo name mappings
+            var repoMappings = 
+            {
+                "geodesk-java": "geodesk",
+                "geodesk-py": "geodesk-py",
+                "geodesk-cpp": "libgeodesk"
+                "gol": "geodesk-gol"
+            };
+
+            // Get the path after the domain
+            var path = window.location.pathname;
+
+            // Match pattern: /myapp/123
+            var match = path.match(/^\/([^\/]+)\/(\d+)$/);
+            if (match) 
+            {
+                var repo = match[1]; // Extract repo name from URL
+                var issue = match[2]; // Extract issue number
+
+                // Look up the mapped repo name
+                var mappedRepo = repoMappings[repo] || repo; // Default to same name if not mapped
+
+                // Construct the GitHub issue URL
+                var redirectUrl = `https://github.com/clarisma/${mappedRepo}/issues/${issue}`;
+                window.location.replace(redirectUrl);
+            } 
+            else 
+            {
+                document.body.innerHTML = "<h2>Invalid URL format</h2>";
+            }
+        })();
+    </script>
+</head>
+<body>
+    <h2>Redirecting...</h2>
+</body>
+</html>
